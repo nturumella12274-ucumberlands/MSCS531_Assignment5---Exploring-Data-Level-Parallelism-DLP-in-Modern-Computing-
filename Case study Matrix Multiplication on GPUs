@@ -1,0 +1,13 @@
+import cupy as cp
+import time
+
+# Using CuPy to utilize GPU for matrix multiplication
+matrix1 = cp.random.rand(1000, 1000)
+matrix2 = cp.random.rand(1000, 1000)
+
+start_time = time.time()
+result_matrix = cp.dot(matrix1, matrix2)
+cp.cuda.Stream.null.synchronize()  # Ensure the computation is complete
+end_time = time.time()
+
+print(f"Matrix multiplication on GPU completed in {end_time - start_time:.6f} seconds.")
